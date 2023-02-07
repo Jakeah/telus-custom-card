@@ -1,0 +1,18 @@
+{
+    "type": "crm-card",
+    "data": {
+      "title": "Return To Dashboard",
+      "location": "crm.record.sidebar",
+      "fetch": {
+        "targetFunction": "store-rep-reports",
+        "objectTypes": [
+          {
+            "name": "contacts",
+            "propertiesToSend": [
+              "hs_object_id"
+            ]
+          }
+        ]
+      }
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "runtime": "nodejs16.x",
+    "version": "1.0",
+    "appFunctions": {
+      "crm-card": {
+        "file": "crm-card.js",
+        "secrets": ["PRIVATE_APP_ACCESS_TOKEN"]
+      },
+      "associate-engagements": {
+        "file": "associate-engagements.js",
+        "secrets": ["PRIVATE_APP_ACCESS_TOKEN"]
+      },
+      "store-rep-reports": {
+        "file": "store-rep-reports.js",
+        "secrets": ["PRIVATE_APP_ACCESS_TOKEN"]
+      },
+      "card-right-pane": {
+        "file": "card-right-pane.js",
+        "secrets": ["PRIVATE_APP_ACCESS_TOKEN"]
+      }
+    }
+  }

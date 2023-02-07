@@ -1,0 +1,18 @@
+{
+    "type": "crm-card",
+    "data": {
+      "title": "Account Information",
+      "location": "crm.record.sidebar",
+      "fetch": {
+        "targetFunction": "card-right-pane",
+        "objectTypes": [
+          {
+            "name": "contacts",
+            "propertiesToSend": [
+              "hs_object_id"
+            ]
+          }
+        ]
+      }
+    }
+}
