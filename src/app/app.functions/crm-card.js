@@ -8,20 +8,72 @@ exports.main = async (context = {}, sendResponse) => {
         "type": "divider",
         "distance": "small"
       },
-      /*
-        {
-          "type": "crm::objectProperty",
-          "objectTypeId":"contact",
-          "objectId": 365, //Update the ID and Object to a relevant example
-          "properties": [
-           "firstname",
-           "lastname",
-           "hubspot_owner_id",
-            "lifecyclestage",
-          ]
-         },
-         //should add component to edit properties of 'primary' contact
-      */
+      {
+        type: "heading",
+        format: "markdown",
+        text: "**Best Promotion Available**"
+      },
+      {
+        type: "text",
+        format: "markdown",
+        text: "**Phone, Internet, and TV Bundle**"
+      },
+      {
+        type: "button",
+        text: "View All Available Promotions",
+        onClick: {
+          type: "IFRAME",
+          width: 700,
+          height: 400,
+          uri: "https://nice.jacobconnors.me/telus-available-promotions-list",
+        }
+      },
+      {
+        "type": "divider",
+        "distance": "small"
+      },
+      {
+
+        type: "buttonRow",
+        "buttons": [
+          {
+            type: 'button',
+            text: 'Authentication/PIN',
+            onClick: {
+              type: 'IFRAME',
+              // Width and height of the iframe (in pixels)
+              width: 1200,
+              height: 800,
+              uri: 'https://n.robertpainslie.com',
+            },
+          },
+          {
+            type: 'button',
+            text: 'Add Phone Line',
+            onClick: {
+              type: 'IFRAME',
+              // Width and height of the iframe (in pixels)
+              width: 800,
+              height: 500,
+              uri: 'https://share.hsforms.com/1xlbwm1rSR36N1CM0z3Qv0w4bd8x',
+            },
+          },
+          {
+            type: 'button',
+            text: 'Update Account Information',
+            onClick: {
+              type: "IFRAME",
+              width: 1200,
+              height: 800,
+              uri: 'https://www.google.com'
+            }
+          }
+        ]
+      },
+      {
+        "type": "divider",
+        "distance": "small"
+      },
       {
         "type": "statistics",
         "items": [
@@ -87,68 +139,25 @@ exports.main = async (context = {}, sendResponse) => {
         "type": "divider",
         "distance": "small"
       },
-//      {
-//          type: 'text',
-//          format: 'markdown',
-//          text: `Available 'context' data for development debugging: \   
-//            ${JSON.stringify(context)}`,
-//      },
     ];
 
     try {
         const { data } = await axios.get("https://zenquotes.io/api/random");
     
         const nextBestActionSection =  [
-            {
-                type: "text",
-                format: "markdown",
-                text: `**${data[0].q}**`
-            },
-            {
-              type: "buttonRow",
-              "buttons": [
-                {
-                    type: 'button',
-                    text: 'Get New Next Best Action',
-                    onClick: {
-                        type: 'SERVERLESS_ACTION_HOOK',
-                        serverlessFunction: "crm-card"
-                    },
-                },
-                {
-                  type: 'button',
-                  text: 'Authentication/PIN',
-                  onClick: {
-                    type: 'IFRAME',
-                    // Width and height of the iframe (in pixels)
-                    width: 1200,
-                    height: 800,
-                    uri: 'https://n.robertpainslie.com',
-                  },
-                },
-                {
-                  type: 'button',
-                  text: 'Add Phone Line',
-                  onClick: {
-                    type: 'IFRAME',
-                    // Width and height of the iframe (in pixels)
-                    width: 800,
-                    height: 500,
-                    uri: 'https://share.hsforms.com/1xlbwm1rSR36N1CM0z3Qv0w4bd8x',
-                  },
-                },
-                {
-                  type: 'button',
-                  text: 'Update Account Information',
-                  onClick: {
-                    type: "IFRAME",
-                    width: 1200,
-                    height: 800,
-                    uri: 'https://www.google.com'
-                  },
-                }
-            ]
-          }
+          {
+              type: "text",
+              format: "markdown",
+              text: `**${data[0].q}**`
+          },
+          {
+            type: 'button',
+            text: 'Get New Next Best Action',
+            onClick: {
+                type: 'SERVERLESS_ACTION_HOOK',
+                serverlessFunction: "crm-card"
+            }
+          },
         ];
     
         sendResponse({sections: [...nextBestActionSection, ...otherSections]});
