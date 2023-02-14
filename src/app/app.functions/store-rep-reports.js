@@ -16,7 +16,7 @@ exports.main = async (context = {}, sendResponse) => {
               {
                 type: "text",
                 format: "markdown",
-                text: "[Performance Dashboard](https://app.hubspot.com/reports-dashboard/7248849/view/9645933)"
+                text: "[Performance Dashboard](https://app.hubspot.com/reports-dashboard/7248849/view/10152137)"
               },
             ]
           },

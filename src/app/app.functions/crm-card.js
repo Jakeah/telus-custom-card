@@ -1,37 +1,10 @@
 const hubspot = require('@hubspot/api-client');
 const axios = require('axios');
+let counter;
 //Need to add code to render the card
 exports.main = async (context = {}, sendResponse) => {
     console.log(context)
-    const otherSections = [
-      {
-        "type": "divider",
-        "distance": "small"
-      },
-      {
-        type: "heading",
-        format: "markdown",
-        text: "**Best Promotion Available**"
-      },
-      {
-        type: "text",
-        format: "markdown",
-        text: "**Phone, Internet, and TV Bundle**"
-      },
-      {
-        type: "button",
-        text: "View All Available Promotions",
-        onClick: {
-          type: "IFRAME",
-          width: 700,
-          height: 400,
-          uri: "https://nice.jacobconnors.me/telus-available-promotions-list",
-        }
-      },
-      {
-        "type": "divider",
-        "distance": "small"
-      },
+    const buttonRowSection = [
       {
 
         type: "buttonRow",
@@ -42,9 +15,9 @@ exports.main = async (context = {}, sendResponse) => {
             onClick: {
               type: 'IFRAME',
               // Width and height of the iframe (in pixels)
-              width: 1200,
-              height: 800,
-              uri: 'https://n.robertpainslie.com',
+              width: 400,
+              height: 300,
+              uri: 'https://nice.jacobconnors.me/telus-pin-lookup',
             },
           },
           {
@@ -69,6 +42,39 @@ exports.main = async (context = {}, sendResponse) => {
             }
           }
         ]
+      },
+
+      {
+        "type": "divider",
+        "distance": "small"
+      },
+
+    ];
+
+    const otherSections = [
+      {
+        "type": "divider",
+        "distance": "small"
+      },
+      {
+        type: "heading",
+        format: "markdown",
+        text: "**Best Promotion Available**"
+      },
+      {
+        type: "text",
+        format: "markdown",
+        text: "**Phone, Internet, and TV Bundle**"
+      },
+      {
+        type: "button",
+        text: "View All Available Promotions",
+        onClick: {
+          type: "IFRAME",
+          width: 700,
+          height: 400,
+          uri: "https://nice.jacobconnors.me/telus-available-promotions-list",
+        }
       },
       {
         "type": "divider",
@@ -141,14 +147,25 @@ exports.main = async (context = {}, sendResponse) => {
       },
     ];
 
+    if(counter === undefined || counter >= 3) {
+      counter = 0;
+    } else {
+      counter += 1;
+    } 
+
     try {
-        const { data } = await axios.get("https://zenquotes.io/api/random");
+        const { data } = await axios.get("https://mocki.io/v1/d969b866-e762-43be-abbb-beb7f292f66a");
     
         const nextBestActionSection =  [
           {
+            type: "heading",
+            format: "markdown",
+            text: "**Next Best Action**"
+          },
+          {
               type: "text",
               format: "markdown",
-              text: `**${data[0].q}**`
+              text: `**${data[counter]}**`
           },
           {
             type: 'button',
@@ -160,7 +177,7 @@ exports.main = async (context = {}, sendResponse) => {
           },
         ];
     
-        sendResponse({sections: [...nextBestActionSection, ...otherSections]});
+        sendResponse({sections: [...buttonRowSection, ...nextBestActionSection, ...otherSections]});
       } catch (error) {
         // "message" will create an error feedback banner when it catches an error
         sendResponse({
@@ -168,7 +185,7 @@ exports.main = async (context = {}, sendResponse) => {
             type: 'ERROR',
             body: `Error: ${error.message}`
           },
-          sections: [...otherSections]
+          sections: [...buttonRowSection, ...otherSections]
         });
       }
 };
